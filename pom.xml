@@ -101,7 +101,36 @@
                         <featureBranchPrefix>feature-</featureBranchPrefix>
                         <releaseBranchPrefix>release-</releaseBranchPrefix>
                         <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+                        <versionTagPrefix>rev-</versionTagPrefix>
                     </flowInitContext>
+                                        <!-- Enable this to push to origin using SSH keys -->
+                    <enableSshAgent>false</enableSshAgent>
+                    <!-- Keep your maven submodules at the same version as the parent POM -->
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <!--
+                      Pusing in-development features to origin allows all devs to see what each other
+                      are working on
+                    -->
+                    <pushFeatures>true</pushFeatures>
+                    <!--
+                      This allows the CI server (e.g. Jenkins) to automatically push new releases to
+                      origin; you can then either manually deploy them or, if you are doing Continuous
+                      Deployments, auto-deploy them to prod
+                    -->
+                    <pushReleases>true</pushReleases>
+                    <!--
+                      Hot Fixes should be pushed to origin as well so that any dev can pick them up
+                    -->
+                    <pushHotfixes>true</pushHotfixes>
+                    <!--
+                      Whether to keep the release branch after finishing the release.
+                    -->
+                    <keepBranch>false</keepBranch>
+                    <!--
+                      Prevents deployments from dev workstations so that they can be done by a CI
+                      server
+                    -->
+                    <noDeploy>true</noDeploy>
                 </configuration>
             </plugin>
             <plugin>
