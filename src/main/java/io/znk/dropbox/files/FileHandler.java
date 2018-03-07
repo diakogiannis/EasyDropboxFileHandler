@@ -1,5 +1,4 @@
 /*
- *
  * Copyright {2017} {Alexius Diakogiannis}
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +33,6 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- *
  * @author Alexius Diakogiannis [alexius at jee.gr]
  */
 public class FileHandler implements FileHandlerInterface {
@@ -46,7 +44,6 @@ public class FileHandler implements FileHandlerInterface {
     }
 
     /**
-     *
      * @param path The path in dropbox there the file exists
      * @return java.io.InputStream with file contents
      * @throws DbxException
@@ -60,8 +57,7 @@ public class FileHandler implements FileHandlerInterface {
     }
 
     /**
-     *
-     * @param folder folder location
+     * @param folder      folder location
      * @param recursively recursive list flag
      * @return List with file paths
      * @throws DbxException
@@ -81,40 +77,38 @@ public class FileHandler implements FileHandlerInterface {
     }
 
     /**
-     *
      * @param remotePath The path in dropbox there the file will be uploaded
-     * @param in java.io.InputStream with file contents
+     * @param in         java.io.InputStream with file contents
      * @throws DbxException
      * @throws UploadErrorException
      * @throws IOException
      */
-    private void uploadFile(String remotePath, InputStream in) throws DbxException, UploadErrorException, IOException {
+    private void uploadFile(String remotePath, InputStream in) throws DbxException, IOException {
         client.files().uploadBuilder(remotePath).uploadAndFinish(in);
     }
 
     /**
-     *
-     * @param path The local path with the file to be uploaded
+     * @param path       The local path with the file to be uploaded
      * @param remotePath The path in dropbox there the file will be uploaded
-     * @param name filename for remote use
+     * @param name       filename for remote use
      * @throws FileNotFoundException
      * @throws DbxException
      * @throws IOException
      */
     @Override
     public void uploadFile(String path, String remotePath, String name)
-            throws FileNotFoundException, DbxException, IOException {
+            throws DbxException, IOException {
         uploadFile(remotePath + name, new FileInputStream(path));
     }
 
     /**
-     *
      * Method created for use with Spring MVC Framework that uses org.springframework.web.multipart.MiltipartFile
-     * @see org.springframework.web.multipart
+     *
      * @param multipartFile The file contents
-     * @param remotePath The path in dropbox there the file will be uploaded
+     * @param remotePath    The path in dropbox there the file will be uploaded
      * @throws IOException
      * @throws DbxException
+     * @see org.springframework.web.multipart
      */
     @Override
     public void uploadFile(MultipartFile multipartFile, String remotePath)
@@ -123,7 +117,6 @@ public class FileHandler implements FileHandlerInterface {
     }
 
     /**
-     * 
      * @param path The path in dropbox there the file will be deleted
      * @throws DbxException
      */
@@ -135,6 +128,7 @@ public class FileHandler implements FileHandlerInterface {
 
     /**
      * Creates a directory using a default Locale the Itallian
+     *
      * @param path The path in dropbox there the directory will be created
      * @param name Directory name
      * @return The directory path
@@ -143,13 +137,12 @@ public class FileHandler implements FileHandlerInterface {
     @Override
     public String createDirectory(String path, String name)
             throws DbxException {
-       return createDirectory(path,name,Locale.ITALY);
+        return createDirectory(path, name, Locale.ITALY);
     }
-    
+
     /**
-     *
-     * @param path The path in dropbox there the directory will be created
-     * @param name Directory name
+     * @param path   The path in dropbox there the directory will be created
+     * @param name   Directory name
      * @param locale The locale
      * @return The directory path
      * @throws DbxException

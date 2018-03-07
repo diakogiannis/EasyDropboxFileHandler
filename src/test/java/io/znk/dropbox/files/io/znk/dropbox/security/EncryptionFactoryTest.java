@@ -26,26 +26,49 @@ import org.junit.Test;
 public class EncryptionFactoryTest {
 
     @Test
-    public void encryptDecrypt(){
+    public void encryptDecrypt() {
         String key = "Foo12345Foo12345";
         String superSecret = "Hello World";
         String encrypted = EncryptionFactory.encrypt(key, superSecret);
 
-        Assert.assertEquals(superSecret,EncryptionFactory.decrypt(key, encrypted));
+        Assert.assertEquals(superSecret, EncryptionFactory.decrypt(key, encrypted));
     }
 
     @Test
-    public void encryptWithNull(){
+    public void encryptWithNull() {
         String key = null;
         String superSecret = "Hello World";
         String encrypted = EncryptionFactory.encrypt(key, superSecret);
-        Assert.assertEquals(null,encrypted);
+        Assert.assertEquals(null, encrypted);
     }
 
     @Test
-    public void decryptWithNull(){
-        String encrypted = EncryptionFactory.encrypt("foo", null);
-        Assert.assertEquals(null,encrypted);
+    public void decryptWithNull() {
+        String encrypted = EncryptionFactory.encrypt("Foo12345Foo12345", null);
+        Assert.assertEquals(null, encrypted);
+    }
+
+    @Test
+    public void encryptDecryptBytes() {
+        String key = "Foo12345Foo12345";
+        String superSecret = "Hello World";
+        byte[] encrypted = EncryptionFactory.encryptBytes(key, superSecret.getBytes());
+
+        Assert.assertEquals(superSecret, new String(EncryptionFactory.decryptBytes(key, encrypted)));
+    }
+
+    @Test
+    public void encryptWithBytesNull() {
+        String key = null;
+        String superSecret = "Hello World";
+        byte[] encrypted = EncryptionFactory.encryptBytes(key, superSecret.getBytes());
+        Assert.assertEquals(null, EncryptionFactory.decryptBytes(key, encrypted));
+    }
+
+    @Test
+    public void decryptWithBytesNull() {
+        byte[] encrypted = EncryptionFactory.encryptBytes("foo", null);
+        Assert.assertEquals(null, encrypted);
     }
 
 }
