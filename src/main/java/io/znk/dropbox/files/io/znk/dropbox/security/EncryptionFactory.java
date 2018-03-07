@@ -43,7 +43,7 @@ public class EncryptionFactory {
      * @param value
      * @return
      */
-    public static String encrypt(String key, String value) {
+    public static String encrypt(final String key,final String value) {
         String encryptedString = null;
 
         try {
@@ -71,7 +71,7 @@ public class EncryptionFactory {
      * @param value
      * @return
      */
-    public static byte[] encryptBytes(String key, byte[] value) {
+    public static byte[] encryptBytes(final String key,final byte[] value) {
         try {
             byte[] randomIVBytes = Base64.decodeBase64(randomIV());
             IvParameterSpec iv = new IvParameterSpec(randomIVBytes);
@@ -107,7 +107,7 @@ public class EncryptionFactory {
      * @param encryptedWithIv
      * @return
      */
-    public static byte[] decryptBytes(String key, byte[] encryptedWithIv) {
+    public static byte[] decryptBytes(final String key,final byte[] encryptedWithIv) {
 
         try {
             byte[] iv = new byte[16];
@@ -140,7 +140,7 @@ public class EncryptionFactory {
      * @param encrypted
      * @return
      */
-    public static String decrypt(String key, String encrypted) {
+    public static String decrypt(final String key,final  String encrypted) {
         String decryptedString = null;
         try {
             byte[] iv = Base64.decodeBase64(encrypted.split("-")[1]);

@@ -38,9 +38,14 @@ import java.util.Locale;
 public class FileHandler implements FileHandlerInterface {
 
     private final DbxClientV2 client;
+    private String key;
 
     public FileHandler(DbxClientV2 client) {
         this.client = client;
+    }
+    public FileHandler(DbxClientV2 client, String key) {
+        this.client = client;
+        this.key = key;
     }
 
     /**
@@ -54,6 +59,18 @@ public class FileHandler implements FileHandlerInterface {
         DbxDownloader downloader = client.files().downloadBuilder(path).start();
         InputStream in = downloader.getInputStream();
         return in;
+    }
+
+    /**
+     * reads an encrypted file
+     *
+     * @param path The path in dropbox there the file exists
+     * @return java.io.InputStream with file contents
+     * @throws DbxException
+     */
+    @Override
+    public InputStream readEncryptedFile(String path) throws DbxException {
+        return null;
     }
 
     /**
@@ -102,6 +119,21 @@ public class FileHandler implements FileHandlerInterface {
     }
 
     /**
+     * Encrypts and uploads a file
+     *
+     * @param path       The local path with the file to be uploaded
+     * @param remotePath The path in dropbox there the file will be uploaded
+     * @param name       filename for remote use
+     * @throws FileNotFoundException
+     * @throws DbxException
+     * @throws IOException
+     */
+    @Override
+    public void uploadEncryptedFile(String path, String remotePath, String name) throws DbxException, IOException {
+
+    }
+
+    /**
      * Method created for use with Spring MVC Framework that uses org.springframework.web.multipart.MiltipartFile
      *
      * @param multipartFile The file contents
@@ -114,6 +146,20 @@ public class FileHandler implements FileHandlerInterface {
     public void uploadFile(MultipartFile multipartFile, String remotePath)
             throws IOException, DbxException {
         uploadFile(remotePath + multipartFile.getName(), multipartFile.getInputStream());
+    }
+
+    /**
+     * Method created for use with Spring MVC Framework that uses org.springframework.web.multipart.MiltipartFile for encrypted files
+     *
+     * @param multipartFile The file contents
+     * @param remotePath    The path in dropbox there the file will be uploaded
+     * @throws IOException
+     * @throws DbxException
+     * @see org.springframework.web.multipart
+     */
+    @Override
+    public void uploadEncryptedFile(MultipartFile multipartFile, String remotePath) throws IOException, DbxException {
+
     }
 
     /**

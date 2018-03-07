@@ -71,6 +71,14 @@ public interface FileHandlerInterface {
     InputStream readFile(String path) throws DbxException;
 
     /**
+     * reads an encrypted file
+     * @param path The path in dropbox there the file exists
+     * @return java.io.InputStream with file contents
+     * @throws DbxException
+     */
+    InputStream readEncryptedFile(String path) throws DbxException;
+
+    /**
      * @param path       The local path with the file to be uploaded
      * @param remotePath The path in dropbox there the file will be uploaded
      * @param name       filename for remote use
@@ -79,6 +87,17 @@ public interface FileHandlerInterface {
      * @throws IOException
      */
     void uploadFile(String path, String remotePath, String name) throws DbxException, IOException;
+
+    /**
+     * Encrypts and uploads a file
+     * @param path       The local path with the file to be uploaded
+     * @param remotePath The path in dropbox there the file will be uploaded
+     * @param name       filename for remote use
+     * @throws FileNotFoundException
+     * @throws DbxException
+     * @throws IOException
+     */
+    void uploadEncryptedFile(String path, String remotePath, String name) throws DbxException, IOException;
 
     /**
      * Method created for use with Spring MVC Framework that uses org.springframework.web.multipart.MiltipartFile
@@ -90,5 +109,16 @@ public interface FileHandlerInterface {
      * @see org.springframework.web.multipart
      */
     void uploadFile(MultipartFile multipartFile, String remotePath) throws IOException, DbxException;
+
+    /**
+     * Method created for use with Spring MVC Framework that uses org.springframework.web.multipart.MiltipartFile for encrypted files
+     *
+     * @param multipartFile The file contents
+     * @param remotePath    The path in dropbox there the file will be uploaded
+     * @throws IOException
+     * @throws DbxException
+     * @see org.springframework.web.multipart
+     */
+    void uploadEncryptedFile(MultipartFile multipartFile, String remotePath) throws IOException, DbxException;
 
 }
