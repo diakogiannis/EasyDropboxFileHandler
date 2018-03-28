@@ -1,5 +1,4 @@
 /*
- *
  * Copyright {2017} {Alexius Diakogiannis}
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,24 +18,19 @@ package io.znk.dropbox.files.connection;
 
 import com.dropbox.core.DbxException;
 import io.znk.dropbox.files.FileHandler;
+import org.junit.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
-import org.junit.Assert;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 /**
- *
  * @author DiakogiannisA
  */
 public class DxIntegrationTest {
