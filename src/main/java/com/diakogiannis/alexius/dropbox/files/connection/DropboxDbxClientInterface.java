@@ -14,7 +14,7 @@
  *    limitations under the License.
  *
  */
-package io.znk.dropbox.files.connection;
+package com.diakogiannis.alexius.dropbox.files.connection;
 
 import com.dropbox.core.v2.DbxClientV2;
 

@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.diakogiannis.alexius.dropbox</groupId>
     <artifactId>EasyDropboxFileHandler</artifactId>
     <version>2.1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
-
+    <name>EasyDropboxFileHandler</name>    
     <inceptionYear>2016</inceptionYear>
-    <organization>
-        <name>Alexius Diakogiannis</name>
-        <url>http://www.jee.gr</url>
-    </organization>
-
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -38,9 +34,15 @@
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
+        <AESEncryptor.version>1.2.7</AESEncryptor.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.diakogiannis.alexius.security</groupId>
+            <artifactId>AESEncryptor</artifactId>
+            <version>1.2.7</version>
+        </dependency>
         <dependency>
             <groupId>com.dropbox.core</groupId>
             <artifactId>dropbox-core-sdk</artifactId>
@@ -104,7 +106,7 @@
                 <configuration>
                     <flowInitContext>
                         <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
-                        <versionTagPrefix>rev-</versionTagPrefix>
+                        <versionTagPrefix>RELEASE-</versionTagPrefix>
                     </flowInitContext>
                     <!-- Enable this to push to origin using SSH keys -->
                     <enableSshAgent>false</enableSshAgent>
@@ -235,5 +237,5 @@
             </plugin>
         </plugins>
     </build>
-    <name>EasyDropboxFileHandler</name>
+    
 </project>

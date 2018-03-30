@@ -14,7 +14,7 @@
  *    limitations under the License.
  *
  */
-package io.znk.dropbox.files;
+package com.diakogiannis.alexius.dropbox.files;
 
 import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
@@ -35,15 +35,15 @@ import java.util.Locale;
 /**
  * @author Alexius Diakogiannis [alexius at jee.gr]
  */
-public class FileHandler implements FileHandlerInterface {
+public class FileHandlerImpl implements FileHandler {
 
     private final DbxClientV2 client;
     private String key;
 
-    public FileHandler(DbxClientV2 client) {
+    public FileHandlerImpl(DbxClientV2 client) {
         this.client = client;
     }
-    public FileHandler(DbxClientV2 client, String key) {
+    public FileHandlerImpl(DbxClientV2 client, String key) {
         this.client = client;
         this.key = key;
     }

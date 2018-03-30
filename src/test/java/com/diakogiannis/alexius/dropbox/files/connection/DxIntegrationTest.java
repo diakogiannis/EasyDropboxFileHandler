@@ -14,10 +14,10 @@
  *    limitations under the License.
  *
  */
-package io.znk.dropbox.files.connection;
+package com.diakogiannis.alexius.dropbox.files.connection;
 
+import com.diakogiannis.alexius.dropbox.files.FileHandlerImpl;
 import com.dropbox.core.DbxException;
-import io.znk.dropbox.files.FileHandler;
 import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,7 +82,7 @@ public class DxIntegrationTest {
         } else {
             DropboxDbxClient dropboxDbxClient = new DropboxDbxClient(appId, accessTokens);
 
-            FileHandler fileHandler = new FileHandler(dropboxDbxClient.getClient());
+            FileHandlerImpl fileHandler = new FileHandlerImpl(dropboxDbxClient.getClient());
 
             String filename = "test-" + UUID.randomUUID().toString();
             File temp = File.createTempFile(filename, ".txt");

@@ -14,7 +14,7 @@
  *    limitations under the License.
  *
  */
-package io.znk.dropbox.files;
+package com.diakogiannis.alexius.dropbox.files;
 
 import com.dropbox.core.DbxException;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +28,7 @@ import java.util.Locale;
 /**
  * @author Alexius Diakogiannis [alexius at jee.gr]
  */
-public interface FileHandlerInterface {
+public interface FileHandler {
 
     /**
      * Creates a directory using a default Locale the Itallian
