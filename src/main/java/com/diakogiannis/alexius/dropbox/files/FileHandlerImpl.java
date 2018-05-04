@@ -31,21 +31,25 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 /**
  * @author Alexius Diakogiannis [alexius at jee.gr]
  */
 public class FileHandlerImpl implements FileHandler {
 
+    public final Logger logger = Logger.getLogger(FileHandlerImpl.class.getCanonicalName());
+
     private final DbxClientV2 client;
-    private String key;
+    private String secureKey;
 
     public FileHandlerImpl(DbxClientV2 client) {
         this.client = client;
     }
-    public FileHandlerImpl(DbxClientV2 client, String key) {
+
+    public FileHandlerImpl(DbxClientV2 client, String secureKey) {
         this.client = client;
-        this.key = key;
+        this.secureKey = secureKey;
     }
 
     /**
@@ -74,7 +78,7 @@ public class FileHandlerImpl implements FileHandler {
     }
 
     /**
-     * @param folder      folder location
+     * @param folder folder location
      * @param recursively recursive list flag
      * @return List with file paths
      * @throws DbxException
@@ -95,7 +99,7 @@ public class FileHandlerImpl implements FileHandler {
 
     /**
      * @param remotePath The path in dropbox there the file will be uploaded
-     * @param in         java.io.InputStream with file contents
+     * @param in java.io.InputStream with file contents
      * @throws DbxException
      * @throws UploadErrorException
      * @throws IOException
@@ -105,9 +109,9 @@ public class FileHandlerImpl implements FileHandler {
     }
 
     /**
-     * @param path       The local path with the file to be uploaded
+     * @param path The local path with the file to be uploaded
      * @param remotePath The path in dropbox there the file will be uploaded
-     * @param name       filename for remote use
+     * @param name filename for remote use
      * @throws FileNotFoundException
      * @throws DbxException
      * @throws IOException
@@ -121,9 +125,9 @@ public class FileHandlerImpl implements FileHandler {
     /**
      * Encrypts and uploads a file
      *
-     * @param path       The local path with the file to be uploaded
+     * @param path The local path with the file to be uploaded
      * @param remotePath The path in dropbox there the file will be uploaded
-     * @param name       filename for remote use
+     * @param name filename for remote use
      * @throws FileNotFoundException
      * @throws DbxException
      * @throws IOException
@@ -134,10 +138,11 @@ public class FileHandlerImpl implements FileHandler {
     }
 
     /**
-     * Method created for use with Spring MVC Framework that uses org.springframework.web.multipart.MiltipartFile
+     * Method created for use with Spring MVC Framework that uses
+     * org.springframework.web.multipart.MiltipartFile
      *
      * @param multipartFile The file contents
-     * @param remotePath    The path in dropbox there the file will be uploaded
+     * @param remotePath The path in dropbox there the file will be uploaded
      * @throws IOException
      * @throws DbxException
      * @see org.springframework.web.multipart
@@ -149,10 +154,11 @@ public class FileHandlerImpl implements FileHandler {
     }
 
     /**
-     * Method created for use with Spring MVC Framework that uses org.springframework.web.multipart.MiltipartFile for encrypted files
+     * Method created for use with Spring MVC Framework that uses
+     * org.springframework.web.multipart.MiltipartFile for encrypted files
      *
      * @param multipartFile The file contents
-     * @param remotePath    The path in dropbox there the file will be uploaded
+     * @param remotePath The path in dropbox there the file will be uploaded
      * @throws IOException
      * @throws DbxException
      * @see org.springframework.web.multipart
@@ -187,8 +193,8 @@ public class FileHandlerImpl implements FileHandler {
     }
 
     /**
-     * @param path   The path in dropbox there the directory will be created
-     * @param name   Directory name
+     * @param path The path in dropbox there the directory will be created
+     * @param name Directory name
      * @param locale The locale
      * @return The directory path
      * @throws DbxException

@@ -64,9 +64,21 @@
         <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
         <AESEncryptor.version>1.2.7</AESEncryptor.version>
         <jacoco.version>0.7.9</jacoco.version>
+        <commons.codec.version>1.11</commons.codec.version>
+        <commons-io.version>2.6</commons-io.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>        
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons.codec.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.diakogiannis.alexius.security</groupId>
             <artifactId>AESEncryptor</artifactId>
