@@ -16,12 +16,15 @@
  */
 package com.diakogiannis.alexius.dropbox.files;
 
+import com.diakogiannis.alexius.aesencryptor.encryption.EncryptionFactory;
+import com.diakogiannis.alexius.aesencryptor.encryption.EncryptionFactoryImpl;
 import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FolderMetadata;
 import com.dropbox.core.v2.files.ListFolderResult;
 import com.dropbox.core.v2.files.UploadErrorException;
+import java.io.File;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
@@ -32,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
+import org.apache.commons.io.IOUtils;
 
 /**
  * @author Alexius Diakogiannis [alexius at jee.gr]
@@ -127,13 +131,21 @@ public class FileHandlerImpl implements FileHandler {
      *
      * @param path The local path with the file to be uploaded
      * @param remotePath The path in dropbox there the file will be uploaded
-     * @param name filename for remote use
      * @throws FileNotFoundException
      * @throws DbxException
      * @throws IOException
      */
     @Override
-    public void uploadEncryptedFile(String path, String remotePath, String name) throws DbxException, IOException {
+    public void uploadEncryptedFile(final String path, final String remotePath) throws DbxException, IOException {
+        EncryptionFactory encryptionFactory = new EncryptionFactoryImpl();
+        String destName="{enc}"+remotePath;
+        FileInputStream inputStream = new FileInputStream(path);
+
+            // read fills buffer with data and ret
+        byte[] bytes =  IOUtils.toByteArray(inputStream);
+        byte[] encbytes = encryptionFactory.encryptBytes(this.secureKey, bytes);
+        File tmpEnc = File.createTempFile(System.nanoTime()+"edbh", "tmp");
+        client.files().uploadBuilder(remotePath).uploadAndFinish(new FileInputStream(tmpEnc));
 
     }
 
